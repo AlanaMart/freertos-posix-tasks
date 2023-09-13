@@ -7,6 +7,15 @@ TaskHandle_t Task1_Handle;
 TaskHandle_t Task2_Handle;
 
 // Function that represents the first task
+
+void Task3(void *pvParameters) {
+    for (;;)
+    {
+        printf("Task 3 is running...\n");
+        vTaskDelay(1000 / portTICK_PERIOD_MS); // Delay for 1 second
+    }
+}
+
 void Task1(void *pvParameters) {
     for (;;)
     {
@@ -42,6 +51,7 @@ int main(void) {
     // Initialize the FreeRTOS kernel
     xTaskCreate(Task1, "Task1", configMINIMAL_STACK_SIZE, NULL, 1, &Task1_Handle);
     xTaskCreate(Task2, "Task2", configMINIMAL_STACK_SIZE, NULL, 1, &Task2_Handle);
+    xTaskCreate(Task3, "Task2", configMINIMAL_STACK_SIZE, NULL, 1, &Task3_Handle);
 
     // Start the FreeRTOS scheduler
     vTaskStartScheduler();
